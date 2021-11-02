@@ -6,6 +6,12 @@ const validateFieldsRecipe = (todo, status) => {
   return true;
 };
 
+const getAllTodos = async () => {
+  const todos = await TodosModel.getAllTodos();
+
+  return todos;
+};
+
 const createTodo = async ({ todo, status }) => {
   const insertDate = new Date().toLocaleString().slice(0, 10).replace(/\//g, '-');
 
@@ -15,5 +21,6 @@ const createTodo = async ({ todo, status }) => {
 };
 
 module.exports = {
+  getAllTodos,
   createTodo,
 };
