@@ -26,8 +26,20 @@ const createTodo = async (data) => {
   return todoRegistry;
 };
 
+const excludeTodo = async (id) => {
+  const db = await connection();
+  const response = await getTodoById(id);
+  
+  if (!response) return null;
+
+  await db.collection('todos').deleteOne({ _id: ObjectId(id) });
+
+  return response;
+};
+
 module.exports = {
   getAllTodos,
   getTodoById,
   createTodo,
+  excludeTodo,
 };

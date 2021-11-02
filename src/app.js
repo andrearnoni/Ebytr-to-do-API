@@ -13,4 +13,6 @@ app.get('/todos', todoController.getAllTodos);
 
 app.post('/todo', todoController.createTodo);
 
+app.delete('/todo/:id', todoController.excludeTodo);
+
 module.exports = app;

@@ -45,8 +45,23 @@ const createTodo = async (req, res) => {
   }
 };
 
+const excludeTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const exclude = await service.excludeTodo(id);
+
+    if (exclude === null) return res.status(404).json(messages.TODO_NOT_FOUND);
+
+    return res.status(204).send();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(messages.ERROR);
+  }
+};
+
 module.exports = {
   getAllTodos,
   getTodoById,
   createTodo,
+  excludeTodo,
 };
