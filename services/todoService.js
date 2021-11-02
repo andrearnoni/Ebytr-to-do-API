@@ -1,6 +1,8 @@
 const TodosModel = require('../models/todoModel');
 
-const validateFieldsRecipe = (todo, status) => {
+const insertDate = new Date().toLocaleString().slice(0, 10).replace(/\//g, '-');
+
+const validateFieldsTodo = (todo, status) => {
   if (!todo || !status) return false;
 
   return true;
@@ -9,18 +11,43 @@ const validateFieldsRecipe = (todo, status) => {
 const getAllTodos = async () => {
   const todos = await TodosModel.getAllTodos();
 
+  if (todos.length === 0) return null;
+
   return todos;
 };
 
-const createTodo = async ({ todo, status }) => {
-  const insertDate = new Date().toLocaleString().slice(0, 10).replace(/\//g, '-');
+const getTodoById = async (id) => {
+  const todo = await TodosModel.getTodoById(id);
 
-  if (!validateFieldsRecipe(todo, status)) return false;
+  if (!todo) return null;
+
+  return todo;
+};
+
+const createTodo = async ({ todo, status }) => {
+  if (!validateFieldsTodo(todo, status)) return false;
 
   return TodosModel.createTodo({ todo, status, insertDate });
 };
 
+const updateTodo = async ({ id, todo, status }) => {
+  if (!validateFieldsTodo(todo, status)) return false;
+
+  return TodosModel.updateTodo({ id, todo, status });
+};
+
+const excludeTodo = async (id) => {
+  const exclude = await TodosModel.excludeTodo(id);
+
+  if (!exclude) return null;
+
+  return exclude;
+};
+
 module.exports = {
   getAllTodos,
+  getTodoById,
   createTodo,
+  updateTodo,
+  excludeTodo,
 };
