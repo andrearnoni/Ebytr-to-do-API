@@ -1,6 +1,6 @@
 const TodosModel = require('../models/todoModel');
 
-const insertDate = new Date().toLocaleString().slice(0, 10).replace(/\//g, '-');
+const createdAt = new Date().toLocaleString().slice(0, 10).replace(/\//g, '-');
 
 const validateFieldsTodo = (todo, status) => {
   if (!todo || !status) return false;
@@ -27,7 +27,7 @@ const getTodoById = async (id) => {
 const createTodo = async ({ todo, status }) => {
   if (!validateFieldsTodo(todo, status)) return false;
 
-  return TodosModel.createTodo({ todo, status, insertDate });
+  return TodosModel.createTodo({ todo, status, createdAt });
 };
 
 const updateTodo = async ({ id, todo, status }) => {
