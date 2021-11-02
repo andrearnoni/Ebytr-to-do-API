@@ -73,7 +73,7 @@ const excludeTodo = async (req, res) => {
 
     if (exclude === null) return res.status(404).json(messages.TODO_NOT_FOUND);
 
-    return res.status(204).json(messages.DELETED_TODO);
+    return res.status(200).json(messages.DELETED_TODO);
   } catch (error) {
     console.log(error);
     return res.status(500).json(messages.ERROR);
