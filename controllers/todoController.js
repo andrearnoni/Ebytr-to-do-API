@@ -37,7 +37,9 @@ const createTodo = async (req, res) => {
     const result = await service.createTodo({ todo, status });
 
     if (result === false) {
-      return res.status(400).json(messages.INVALID_ENTRY); 
+      res.status(400).json(messages.INVALID_ENTRY); 
+    } else if (result === null) {
+      return res.status(400).json(messages.INVALID_STATUS); 
     }
 
     return res.status(201).json({
@@ -54,9 +56,17 @@ const updateTodo = async (req, res) => {
   try {
     const { todo, status } = req.body;
     const { id } = req.params;
-    
-    await service.updateTodo({ id, todo, status });
 
+    const result = await service.updateTodo({ id, todo, status });
+
+    if (result === false) {
+      res.status(400).json(messages.INVALID_ENTRY); 
+    } else if (result === null) {
+      res.status(400).json(messages.INVALID_STATUS); 
+    } else {
+      await service.updateTodo({ id, todo, status });
+    }
+    
     const response = await service.getTodoById(id);
 
     return res.status(200).json(response);

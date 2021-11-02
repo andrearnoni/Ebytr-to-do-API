@@ -8,6 +8,12 @@ const validateFieldsTodo = (todo, status) => {
   return true;
 };
 
+const validateStatus = (status) => {
+  if (status !== 'Pendente' && status !== 'Em andamento' && status !== 'Pronto') return false;
+
+  return true;
+};
+
 const getAllTodos = async () => {
   const todos = await TodosModel.getAllTodos();
 
@@ -26,12 +32,14 @@ const getTodoById = async (id) => {
 
 const createTodo = async ({ todo, status }) => {
   if (!validateFieldsTodo(todo, status)) return false;
+  if (!validateStatus(status)) return null;
 
   return TodosModel.createTodo({ todo, status, createdAt });
 };
 
 const updateTodo = async ({ id, todo, status }) => {
   if (!validateFieldsTodo(todo, status)) return false;
+  if (!validateStatus(status)) return null;
 
   return TodosModel.updateTodo({ id, todo, status });
 };
