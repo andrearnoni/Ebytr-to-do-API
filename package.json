@@ -16,6 +16,7 @@
     "mongodb": "^4.1.3"
   },
   "devDependencies": {
+    "eslint-config-trybe-backend": "^1.0.4",
     "nodemon": "^2.0.14"
   }
 }
