@@ -1,6 +1,17 @@
 const service = require('../services/todoService');
 const messages = require('../helpers/validationMessages');
 
+const getAllTodos = async (_req, res) => {
+  try {
+    const todos = await service.getAllTodos();
+
+    return res.status(200).json(todos);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(messages.ERROR);
+  }
+};
+
 const createTodo = async (req, res) => {
   try {
     const { todo, status } = req.body;
@@ -21,5 +32,6 @@ const createTodo = async (req, res) => {
 };
 
 module.exports = {
+  getAllTodos,
   createTodo,
 };
