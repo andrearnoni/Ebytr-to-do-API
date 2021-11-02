@@ -87,7 +87,7 @@ Start the server
 
 ## Note:
 
-To test the API you can use the browser for some functions or an application like [Postman]('https://www.postman.com/') or [Insomnia]('https://insomnia.rest/') to a complete experience.
+To test the API you can use the browser for some functions or an application like [Postman](https://www.postman.com) or [Insomnia](https://insomnia.rest) to a complete experience.
 
 ## Author
 
