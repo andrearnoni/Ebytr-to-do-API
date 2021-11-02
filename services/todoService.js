@@ -2,7 +2,7 @@ const TodosModel = require('../models/todoModel');
 
 const insertDate = new Date().toLocaleString().slice(0, 10).replace(/\//g, '-');
 
-const validateFieldsRecipe = (todo, status) => {
+const validateFieldsTodo = (todo, status) => {
   if (!todo || !status) return false;
 
   return true;
@@ -10,6 +10,8 @@ const validateFieldsRecipe = (todo, status) => {
 
 const getAllTodos = async () => {
   const todos = await TodosModel.getAllTodos();
+
+  if (todos.length === 0) return null;
 
   return todos;
 };
@@ -23,9 +25,15 @@ const getTodoById = async (id) => {
 };
 
 const createTodo = async ({ todo, status }) => {
-  if (!validateFieldsRecipe(todo, status)) return false;
+  if (!validateFieldsTodo(todo, status)) return false;
 
   return TodosModel.createTodo({ todo, status, insertDate });
+};
+
+const updateTodo = async ({ id, todo, status }) => {
+  if (!validateFieldsTodo(todo, status)) return false;
+
+  return TodosModel.updateTodo({ id, todo, status });
 };
 
 const excludeTodo = async (id) => {
@@ -40,5 +48,6 @@ module.exports = {
   getAllTodos,
   getTodoById,
   createTodo,
+  updateTodo,
   excludeTodo,
 };

@@ -26,6 +26,17 @@ const createTodo = async (data) => {
   return todoRegistry;
 };
 
+const updateTodo = async ({ id, todo, status }) => {
+  const db = await connection();
+
+  if (!ObjectId.isValid(id)) return null;
+
+  const result = await db.collection('todos')
+    .updateOne({ _id: ObjectId(id) }, { $set: { todo, status } });
+
+  return result;
+};
+
 const excludeTodo = async (id) => {
   const db = await connection();
   const response = await getTodoById(id);
@@ -41,5 +52,6 @@ module.exports = {
   getAllTodos,
   getTodoById,
   createTodo,
+  updateTodo,
   excludeTodo,
 };

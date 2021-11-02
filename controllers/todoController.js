@@ -5,6 +5,11 @@ const getAllTodos = async (_req, res) => {
   try {
     const todos = await service.getAllTodos();
 
+    if (todos === null) {
+      return res.status(404)
+        .json(messages.WITHOUT_TODOS); 
+    }
+
     return res.status(200).json(todos);
   } catch (error) {
     console.log(error);
@@ -45,6 +50,22 @@ const createTodo = async (req, res) => {
   }
 };
 
+const updateTodo = async (req, res) => {
+  try {
+    const { todo, status } = req.body;
+    const { id } = req.params;
+    
+    await service.updateTodo({ id, todo, status });
+
+    const response = await service.getTodoById(id);
+
+    return res.status(200).json(response);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(messages.ERROR);
+  }
+};
+
 const excludeTodo = async (req, res) => {
   try {
     const { id } = req.params;
@@ -52,7 +73,7 @@ const excludeTodo = async (req, res) => {
 
     if (exclude === null) return res.status(404).json(messages.TODO_NOT_FOUND);
 
-    return res.status(204).send();
+    return res.status(204).json(messages.DELETED_TODO);
   } catch (error) {
     console.log(error);
     return res.status(500).json(messages.ERROR);
@@ -63,5 +84,6 @@ module.exports = {
   getAllTodos,
   getTodoById,
   createTodo,
+  updateTodo,
   excludeTodo,
 };
