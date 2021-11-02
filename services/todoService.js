@@ -28,8 +28,17 @@ const createTodo = async ({ todo, status }) => {
   return TodosModel.createTodo({ todo, status, insertDate });
 };
 
+const excludeTodo = async (id) => {
+  const exclude = await TodosModel.excludeTodo(id);
+
+  if (!exclude) return null;
+
+  return exclude;
+};
+
 module.exports = {
   getAllTodos,
   getTodoById,
   createTodo,
+  excludeTodo,
 };
