@@ -7,6 +7,8 @@ app.use(cors());
 
 const todoController = require('../controllers/todoController');
 
+app.get('/todo/:id', todoController.getTodoById);
+
 app.get('/todos', todoController.getAllTodos);
 
 app.post('/todo', todoController.createTodo);

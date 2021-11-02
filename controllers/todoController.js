@@ -12,6 +12,20 @@ const getAllTodos = async (_req, res) => {
   }
 };
 
+const getTodoById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const todo = await service.getTodoById(id);
+
+    if (todo === null) return res.status(404).json(messages.TODO_NOT_FOUND);
+
+    return res.status(200).json(todo);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(messages.ERROR);
+  }
+};
+
 const createTodo = async (req, res) => {
   try {
     const { todo, status } = req.body;
@@ -21,10 +35,10 @@ const createTodo = async (req, res) => {
       return res.status(400).json(messages.INVALID_ENTRY); 
     }
 
-    return res.status(201).json({ info: {
+    return res.status(201).json({
       todo,
       status,
-    } });
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json(messages.ERROR);
@@ -33,5 +47,6 @@ const createTodo = async (req, res) => {
 
 module.exports = {
   getAllTodos,
+  getTodoById,
   createTodo,
 };
