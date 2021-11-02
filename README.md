@@ -88,7 +88,7 @@ Start the server
 ## Notes:
 
 * To test the API you can use the browser for some functions or an application like [Postman](https://www.postman.com) or [Insomnia](https://insomnia.rest) to a complete experience.
-* The application has a file called **.env.example** to show an example (like the name says) how to put informations to connect with database in MongoDB and a localhost port. 
+* The application has a file called **.env.example** to show examples of environment variables that connect with database in MongoDB and a localhost port. 
 
 ## Author
 
