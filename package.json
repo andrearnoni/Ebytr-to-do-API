@@ -1,7 +1,7 @@
 {
   "name": "ebytr-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "An API to create and get informations about tasks",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
     "dev": "nodemon ./src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "André Arnoni",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
