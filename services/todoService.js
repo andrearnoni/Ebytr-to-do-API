@@ -1,6 +1,7 @@
+const moment = require('moment');
 const TodosModel = require('../models/todoModel');
 
-const createdAt = new Date().toLocaleString().slice(0, 10).replace(/\//g, '-');
+const createdAt = moment(new Date()).format('DD/MM/YYYY');
 
 const validateFieldsTodo = (todo, status) => {
   if (!todo || !status) return false;
